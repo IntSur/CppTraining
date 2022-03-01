@@ -1,16 +1,7 @@
 #include <iostream>
+#include "max.h"
+
 using namespace std;
-float max(float a,float b)
-{
-    if(a>b)
-    {
-        return a;
-    }
-    else
-    {
-        return b;
-    }
-}
 
 int main()
 {
