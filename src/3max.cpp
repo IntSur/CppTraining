@@ -1,5 +1,5 @@
 #include <iostream>
-#include "max.h"
+#include "../include/max.h"
 
 using namespace std;
 

@@ -3,12 +3,9 @@ using namespace std;
 
 int absolute(int m)
 {
-    if(m<0)
-    {
+    if(m<0) {
         return (-m);
-    }
-    else
-    {
+    } else {
         return m;
     }
 }
