@@ -11,7 +11,8 @@ int main() {
     // 2.c++风格写法
     string string1 = "C++ style string";
     cout << "string1 = " << string1 << endl;
-    cout << "sizeof(string1) = " << string1.size() << endl;
+    cout << "string1.size() = " << string1.size() << endl;
+    cout << "sizeof(string1) = " << sizeof(string1) << endl;
 
     //c++风格的字符串增改查
     string string2 = " Be added C string"; 
