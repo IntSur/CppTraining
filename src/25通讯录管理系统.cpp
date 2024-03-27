@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <unistd.h>
 
 using namespace std;
+
+#define MAX_PERSON_NUM 3
 
 enum FUNC{
     QUIT,
@@ -12,6 +15,21 @@ enum FUNC{
     SEARCH_CONTACT,
     MODIFY_CONTACT,
     CLEAN_CONTACT,
+};
+
+struct Person
+{
+    string name;
+    int gender;
+    int age;
+    string tel;
+    string address;
+};
+
+struct Addressbook
+{
+    Person persons[MAX_PERSON_NUM];
+    int person_num;
 };
 
 void showMainInfo() {
@@ -27,39 +45,92 @@ void showMainInfo() {
     cout << "****************************************************" << endl;
 }
 
+int searchContact(Addressbook *paddressbook, string contact_name) {
+    for (int i = 0; i < paddressbook->person_num; i++)
+    {
+        if (paddressbook->persons[i].name == contact_name)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 
 int main() {
     int select_func;
-    showMainInfo();
+    Addressbook addressbook;
+    addressbook.person_num = 0;
 
-    cin >> select_func;
-
-    switch (select_func)
+    while (1)
     {
-        case ADD_CONTACT:
-            cout << "ADD_CONTACT" << endl;
-            break;
-        case SHOW_CONTACT:
-            cout << "SHOW_CONTACT" << endl;
-            break;
-        case DEL_CONTACT:
-            cout << "DEL_CONTACT" << endl;
-            break;
-        case SEARCH_CONTACT:
-            cout << "SEARCH_CONTACT" << endl;
-            break;
-        case MODIFY_CONTACT:
-            cout << "MODIFY_CONTACT" << endl;
-            break;
-        case CLEAN_CONTACT:
-            cout << "CLEAN_CONTACT" << endl;
-            break;
-        case QUIT:
-            cout << "Bye :)" << endl;
-            return 0;
-            break;
-        default:
-            break;
+        showMainInfo();
+
+        cin >> select_func;
+
+        switch (select_func)
+        {
+            case ADD_CONTACT:
+                if (addressbook.person_num == MAX_PERSON_NUM)
+                {
+                    cout << "通讯录已满，无法继续添加。" << endl;
+                } else {
+                    cout << "请输入联系人姓名：";
+                    cin >> addressbook.persons[addressbook.person_num].name;
+                    cout << "请选择联系人性别：1.男 2.女" << endl;
+                    cin >> addressbook.persons[addressbook.person_num].gender;
+                    cout << "请输入联系人年龄：";
+                    cin >> addressbook.persons[addressbook.person_num].age;
+                    cout << "请输入联系人联系电话：";
+                    cin >> addressbook.persons[addressbook.person_num].tel;
+                    cout << "请输入联系人地址：" ;
+                    cin >> addressbook.persons[addressbook.person_num].address;
+                    addressbook.person_num++;
+                    cout << "添加成功"<< endl;
+                    usleep(500*1000);
+                    system("clear");
+                }
+                break;
+            case SHOW_CONTACT:
+                if (addressbook.person_num == 0)
+                {
+                    cout << "当前暂无联系人。" << endl;
+                    usleep(5000*1000);
+                } else {
+                    for (int i = 0; i < addressbook.person_num; i++)
+                    {
+                        cout << "联系人姓名：" << addressbook.persons[i].name << endl;
+                        cout << "\t性别：" << (addressbook.persons[i].gender == 1 ? "男" : "女") << endl;
+                        cout << "\t年龄：" << addressbook.persons[i].age << endl;
+                        cout << "\t联系电话：" << addressbook.persons[i].tel << endl;
+                        cout << "\t联系地址：" << addressbook.persons[i].address << endl;
+                    }
+                    usleep(5000*1000);
+                }
+            
+                system("clear");
+                break;
+            case DEL_CONTACT:
+
+                break;
+            case SEARCH_CONTACT:
+                string search_contact_name = "";
+                cin >> search_contact_name;
+                searchContact(&addressbook, search_contact_name);
+                break;
+            case MODIFY_CONTACT:
+                cout << "MODIFY_CONTACT" << endl;
+                break;
+            case CLEAN_CONTACT:
+                cout << "CLEAN_CONTACT" << endl;
+                break;
+            case QUIT:
+                cout << "Bye :)" << endl;
+                return 0;
+                break;
+            default:
+                cout << "没有 " << select_func << " 的对应功能。" << endl;
+                break;
+        }
     }
 
     return 0;
