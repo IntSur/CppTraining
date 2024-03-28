@@ -58,6 +58,11 @@ int searchContact(Addressbook *paddressbook, string contact_name) {
 
 int main() {
     int select_func;
+    int contact_index;
+    int delete_index;
+    string search_contact_name = "";
+    string delete_contact_name = "";
+
     Addressbook addressbook;
     addressbook.person_num = 0;
 
@@ -106,16 +111,40 @@ int main() {
                     }
                     usleep(5000*1000);
                 }
-            
                 system("clear");
                 break;
             case DEL_CONTACT:
-
+                cout << "请输入要删除的联系人姓名: ";
+                cin >> delete_contact_name;
+                delete_index = searchContact(&addressbook, search_contact_name);
+                if (delete_index == -1){
+                    cout << "没有该联系人。" << endl;
+                } else {
+                    for (int i = delete_index; i < addressbook.person_num; i++)
+                    {
+                        addressbook.persons[i] = addressbook.persons[i + 1];
+                    }
+                    addressbook.person_num--;
+                };
+                usleep(1000*1000);
+                system("clear");
                 break;
             case SEARCH_CONTACT:
-                string search_contact_name = "";
+                cout << "请输入要查找的联系人姓名: ";
                 cin >> search_contact_name;
-                searchContact(&addressbook, search_contact_name);
+                contact_index = searchContact(&addressbook, search_contact_name);
+                if (delete_index == -1){
+                    cout << "没有该联系人。" << endl;
+                } else {
+                    for (int i = delete_index; i < addressbook.person_num; i++)
+                    {
+                        addressbook.persons[i] = addressbook.persons[i + 1];
+                    }
+                    addressbook.person_num--;
+                };
+                usleep(1000*1000);
+                system("clear");
+                cout << "contact_index = " << contact_index << endl;
                 break;
             case MODIFY_CONTACT:
                 cout << "MODIFY_CONTACT" << endl;
