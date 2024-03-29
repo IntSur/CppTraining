@@ -60,8 +60,10 @@ int main() {
     int select_func;
     int contact_index;
     int delete_index;
+    int modify_index;
     string search_contact_name = "";
     string delete_contact_name = "";
+    string modify_contact_name = "";
 
     Addressbook addressbook;
     addressbook.person_num = 0;
@@ -116,41 +118,68 @@ int main() {
             case DEL_CONTACT:
                 cout << "请输入要删除的联系人姓名: ";
                 cin >> delete_contact_name;
-                delete_index = searchContact(&addressbook, search_contact_name);
+                delete_index = searchContact(&addressbook, delete_contact_name);
                 if (delete_index == -1){
                     cout << "没有该联系人。" << endl;
+                    usleep(1000*1000);
                 } else {
                     for (int i = delete_index; i < addressbook.person_num; i++)
                     {
                         addressbook.persons[i] = addressbook.persons[i + 1];
                     }
                     addressbook.person_num--;
+                    cout << "已删除该联系人。" << endl;
                 };
-                usleep(1000*1000);
                 system("clear");
                 break;
             case SEARCH_CONTACT:
                 cout << "请输入要查找的联系人姓名: ";
                 cin >> search_contact_name;
                 contact_index = searchContact(&addressbook, search_contact_name);
-                if (delete_index == -1){
+
+                if (contact_index == -1){
                     cout << "没有该联系人。" << endl;
+                    usleep(1000*1000);
                 } else {
-                    for (int i = delete_index; i < addressbook.person_num; i++)
-                    {
-                        addressbook.persons[i] = addressbook.persons[i + 1];
-                    }
-                    addressbook.person_num--;
+                    cout << "查找到联系人：" << addressbook.persons[contact_index].name << endl;
+                    cout << "\t性别：" << (addressbook.persons[contact_index].gender == 1 ? "男" : "女") << endl;
+                    cout << "\t年龄：" << addressbook.persons[contact_index].age << endl;
+                    cout << "\t联系电话：" << addressbook.persons[contact_index].tel << endl;
+                    cout << "\t联系地址：" << addressbook.persons[contact_index].address << endl;
+                    usleep(5000*1000);
                 };
-                usleep(1000*1000);
+
                 system("clear");
-                cout << "contact_index = " << contact_index << endl;
                 break;
             case MODIFY_CONTACT:
-                cout << "MODIFY_CONTACT" << endl;
+                cout << "请输入要修改的联系人姓名: ";
+                cin >> modify_contact_name;
+                modify_index = searchContact(&addressbook, modify_contact_name);
+
+                if (modify_index == -1)
+                {
+                    cout << "没有该联系人。" << endl;
+                    usleep(1000*1000);
+                } else {
+                    cout << "请输入联系人的新姓名：";
+                    cin >> addressbook.persons[modify_index].name;
+                    cout << "请选择联系人性别：1.男 2.女" << endl;
+                    cin >> addressbook.persons[modify_index].gender;
+                    cout << "请输入联系人年龄：";
+                    cin >> addressbook.persons[modify_index].age;
+                    cout << "请输入联系人联系电话：";
+                    cin >> addressbook.persons[modify_index].tel;
+                    cout << "请输入联系人地址：" ;
+                    cin >> addressbook.persons[modify_index].address;
+                    cout << "修改成功"<< endl;
+                    usleep(500*1000);
+                }
+                system("clear");
                 break;
             case CLEAN_CONTACT:
-                cout << "CLEAN_CONTACT" << endl;
+                usleep(1000*1000);
+                addressbook.person_num = 0;
+                cout << "已清空联系人。" << endl;
                 break;
             case QUIT:
                 cout << "Bye :)" << endl;
