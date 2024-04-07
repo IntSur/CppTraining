@@ -2,7 +2,7 @@
 using namespace std;
 
 void printNum(const int& num) {
-    // num = 1000;//形参加了const，形参就会影响到实参。
+    // num = 1000;//形参加了const，num就不能被改变。
     // 所以函数中一般利用常量引用防止误操作修改实参。
 }
 
