@@ -4,6 +4,8 @@
         "*.wxss": "css",
         "*.wxs": "javascript",
         "ostream": "cpp",
-        "iostream": "cpp"
-    }
+        "iostream": "cpp",
+        "new": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }
