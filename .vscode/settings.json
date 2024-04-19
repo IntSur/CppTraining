@@ -5,7 +5,11 @@
         "*.wxs": "javascript",
         "ostream": "cpp",
         "iostream": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "iosfwd": "cpp",
+        "*.tcc": "cpp",
+        "limits": "cpp",
+        "type_traits": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
