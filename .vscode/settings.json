@@ -5,6 +5,9 @@
         "*.wxs": "javascript",
         "new": "cpp",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "fstream": "cpp",
+        "*.tcc": "cpp",
+        "iosfwd": "cpp"
     }
 }
