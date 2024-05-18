@@ -20,5 +20,9 @@ int main() {
     string s4(10, 'a');
     cout << "s4 = " << s4 << endl;
 
+    string s5;
+    s5.assign("hello world", 5);
+    cout << s5 << endl;
+
     return 0;
 }
