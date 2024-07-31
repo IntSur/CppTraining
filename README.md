@@ -1,6 +1,6 @@
 # IntSur's CppTraining
 
-![C++Logo](.\README.assets\C++Logo.png)
+![C++Logo](./README.assets/C++Logo.png)
 
 ## Learning Source URLs 🔗
 
