@@ -1,4 +1,4 @@
-# IntSur's CppTraining
+# **IntSur's CppTraining**
 
 ![C++Logo](./README.assets/C++Logo.png)
 
